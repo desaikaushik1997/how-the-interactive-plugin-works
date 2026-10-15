@@ -18,17 +18,29 @@ table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 14px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#F6F9FE}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:10px 0}
 label{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
-select,input{width:100%;padding:9px 10px;border:1px solid #C9D8F5;border-radius:10px;font:inherit;font-size:14px;background:#fff}
+select,input,textarea{width:100%;padding:9px 10px;border:1px solid #C9D8F5;border-radius:10px;font:inherit;font-size:14px;background:#fff}
 pre{margin:0;white-space:pre-wrap;word-wrap:break-word;background:#0C1A33;color:#fff;border-radius:12px;padding:16px;font:13.5px/1.6 Consolas,'Courier New',monospace}
 button{padding:10px 20px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:700 14px Roboto,'Segoe UI',Arial,sans-serif;cursor:pointer;margin-top:10px}
 button:hover{background:#0B4ECC}
 .note{background:#FFF7DE;border:1px solid #F0D58A;border-radius:12px;padding:12px 14px;font-size:14px;margin:12px 0}
 .ver{position:fixed;right:12px;bottom:10px;padding:4px 10px;border-radius:999px;background:#0C1A33;color:#fff;font-size:11px;font-weight:700;opacity:.85}
 a{color:#0B4ECC}
+a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid #0168FA;border-radius:16px;padding:20px 22px;margin:0 0 20px;box-shadow:0 2px 0 #0B4ECC}
+a.card:hover{background:#F4F8FE}
+a.card .ct{display:block;font-size:20px;font-weight:700;margin-bottom:4px}
+a.card .cd{display:block;color:var(--muted);font-size:15px;margin-bottom:10px}
+a.card .cg{display:inline-block;padding:8px 18px;border-radius:999px;background:#0168FA;color:#fff;font-weight:700;font-size:14px}
+a.hl{background:#FFF1A8;color:#0B4ECC;font-weight:700;padding:1px 6px;border-radius:6px;text-decoration:underline;text-underline-offset:2px}
+.look{border:2px solid #0168FA;background:#EEF4FE;border-radius:14px;padding:16px 18px;margin:16px 0}
+.look b.t{display:block;font-size:16px;margin-bottom:4px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.btns a{display:inline-block;padding:12px 20px;border-radius:999px;background:#0168FA;color:#fff;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 2px 0 #0B4ECC}
+.btns a:hover{background:#0B4ECC}
+.btns a.alt{background:#fff;color:#0B4ECC;border:2px solid #0168FA;box-shadow:none;padding:10px 20px}
 </style></head><body><div class="wrap">
 <h1>How the MedSynapse Interactive Assistant works</h1>
 <p class="muted">A visual guide for medical writers: how the pieces connect, how to make content, how to save your free usage, and how updates arrive.</p>
-<nav><a href="#connect">1 How it connects</a><a href="#writer">2 Making content</a><a href="#save">3 Save usage</a><a href="#update">4 Updates</a><a href="https://desaikaushik1997.github.io/medsyn-assets/">Component library</a></nav>
+<nav><a href="#connect">1 How it connects</a><a href="#writer">2 Making content</a><a href="#save">3 Save usage</a><a href="#update">4 Updates</a></nav>
 
 <section id="connect"><h2>1. How the pieces connect</h2>
 <p>The assistant lives in a private GitHub repository. Claude copies it once (the plugin), and keeps it up to date. You work only in Claude and TinyMCE.</p>
@@ -45,7 +57,7 @@ a{color:#0B4ECC}
 <div class="note"><b>Save your free usage:</b> every question Claude has to ask costs a turn. Answer them all in your <b>first message</b> instead: see section 3.</div></section>
 
 <section id="save"><h2>3. Answer everything in your first message</h2>
-<p>Claude needs eight answers before it can plan your content. If you give them in the first message (together with your article), Claude skips the questions and the look picker, and goes straight to the plan. That is the cheapest way to work, especially on the free plan.</p>
+<p>Claude needs eight answers before it can plan your content. If you give them in the first message (together with your article), Claude skips the questions and the look picker, and goes straight to the plan (or straight to building, if you ask it to skip the plan: see below). That is the cheapest way to work, especially on the free plan.</p>
 <h3>The questions, and what you can answer</h3>
 <table><tr><th>#</th><th>Question</th><th>Your options</th></tr>
 <tr><td>1</td><td>Format</td><td>Interactive article (today's only format)</td></tr>
@@ -55,8 +67,13 @@ a{color:#0B4ECC}
 <tr><td>5</td><td>Tap cue</td><td>0 Plain, 1 Subtle, 2 Pulse chevron (recommended), 3 TAP chips (only if the client asks), 4 Ripple row, 5 Solid rows + white ripple, 6 Arrow trail</td></tr>
 <tr><td>6</td><td>Introduction, references, abbreviations</td><td>Include or leave out each one. Default: leave the intro out; include references only if your source has them</td></tr>
 <tr><td>7</td><td>Density</td><td>Concise or fuller</td></tr>
-<tr><td>8</td><td>Images</td><td>None, or give the AWS link for each image. Without links, image data goes into components</td></tr></table>
-<p>Not sure what a palette, layout or tap cue looks like? Open the <a href="https://desaikaushik1997.github.io/medsyn-assets/">library page</a> first (Palettes, layouts and tap cues), choose, then fill in the form below.</p>
+<tr><td>8</td><td>Images</td><td>None, or give the AWS link for each image. Without links, image data goes into components</td></tr>
+<tr><td>Optional</td><td>Components</td><td>If you already know which components you want, name them per section (numbers are in the component gallery), and you can ask Claude to skip the plan</td></tr></table>
+<h3>Already know which components you want? Skip the planning step</h3>
+<p>Normally Claude shows a plan table and waits for your approval before building. If you have already chosen components from the <a class="hl" href="https://desaikaushik1997.github.io/medsyn-assets/component-gallery.html" target="_blank" rel="noopener">component gallery (click to open) &#8599;</a>, add them to your first message, one line per section, and tell Claude to skip the plan. For example: <b>Section 1: component 52. Section 2: component 59. Section 3: your choice.</b> Claude then builds straight away and puts the plan table in its hand-off report afterwards. Any section you leave out of the list, Claude chooses for you.</p>
+<div class="note">Claude still checks that every component you name exists and that your article has the data it needs (for example the numbers for a chart). If something is missing it asks one short question instead of inventing it. Skipping the plan saves a turn, but you will check the structure after the build instead of before it.</div>
+<div class="look"><b class="t">Click to look first, then choose</b>Not sure what a palette, layout or tap cue looks like, or which components exist? Open these pages in a new tab, note your choices, then fill in the form below.
+<div class="btns"><a href="https://desaikaushik1997.github.io/medsyn-assets/palette-preview.html" target="_blank" rel="noopener">Open the palettes, layouts and tap cues &#8599;</a><a class="alt" href="https://desaikaushik1997.github.io/medsyn-assets/component-gallery.html" target="_blank" rel="noopener">Open the component gallery &#8599;</a></div></div>
 <h3>Build your first message</h3>
 <div class="grid">
 <div><label for="aud">Audience</label><select id="aud"><option>HCP</option><option>patient / caregiver</option></select></div>
@@ -70,16 +87,21 @@ a{color:#0B4ECC}
 <div><label for="den">Density</label><select id="den"><option>concise</option><option>fuller</option></select></div>
 <div><label for="img">Images</label><input id="img" value="none" placeholder="none, or paste the AWS links"></div>
 </div>
+<div class="grid">
+<div><label for="comp">Components you already chose (optional, one line per section)</label><textarea id="comp" rows="3" placeholder="Section 1: component 52&#10;Section 2: component 59&#10;Section 3: your choice"></textarea></div>
+<div><label for="plan">The plan</label><select id="plan"><option value="show">Show me the plan first (recommended)</option><option value="skip">Skip the plan and build straight away</option></select></div>
+</div>
 <pre id="msg"></pre>
 <button type="button" id="copy">Copy message</button> <span id="done" class="muted"></span>
-<p class="muted" style="margin-top:12px">Paste it into a new Claude chat and attach your Word or PDF file. Claude then shows a plan table: check it and reply <b>Looks good, go ahead</b> (or tell it what to change). It will not build until you approve.</p></section>
+<p class="muted" style="margin-top:12px">Paste it into a new Claude chat and attach your Word or PDF file. Claude then shows a plan table: check it and reply <b>Looks good, go ahead</b> (or tell it what to change). It will not build until you approve, unless you chose to skip the plan.</p></section>
 
 <section id="update"><h2>4. How an update reaches you</h2>
 <p>Claude only offers an update when the admin raises the version number. After an update, always start a new chat.</p>
 <div class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 570" font-family="Roboto, 'Segoe UI', Arial, sans-serif"><defs><marker id="ar-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0C1A33"/></marker><marker id="arg-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5B6B86"/></marker></defs><rect width="1600" height="570" fill="#FFFFFF"/><text x="40" y="52" font-size="30" font-weight="700" fill="#0C1A33" text-anchor="start"><tspan x="40" dy="0">How an update reaches the writers</tspan></text><text x="40" y="82" font-size="17" font-weight="400" fill="#5B6B86" text-anchor="start"><tspan x="40" dy="0">Claude only offers an update when the version number goes up.</tspan></text><text x="40" y="120" font-size="19" font-weight="700" fill="#1B9E5A" text-anchor="start"><tspan x="40" dy="0">Admin: publishing an update</tspan></text><rect x="50" y="136" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="80" cy="168" r="17" fill="#1B9E5A"/><text x="80" y="174" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="80" dy="0">1</tspan></text><text x="144" y="212" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="144" dy="0">Change files</tspan></text><text x="144" y="241" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="144" dy="0">components, palettes,</tspan><tspan x="144" dy="17">rules</tspan></text><path d="M240,211 L266,211" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="268" y="136" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="298" cy="168" r="17" fill="#1B9E5A"/><text x="298" y="174" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="298" dy="0">2</tspan></text><text x="362" y="212" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="362" dy="0">Raise the</tspan><tspan x="362" dy="21">version number</tspan></text><text x="362" y="262" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="362" dy="0">same number in</tspan><tspan x="362" dy="17">both manifest files</tspan></text><path d="M458,211 L484,211" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="486" y="136" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="516" cy="168" r="17" fill="#1B9E5A"/><text x="516" y="174" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="516" dy="0">3</tspan></text><text x="580" y="212" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="580" dy="0">Upload to</tspan><tspan x="580" dy="21">GitHub</tspan></text><text x="580" y="262" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="580" dy="0">commit and push</tspan></text><path d="M676,211 L702,211" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="704" y="136" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="734" cy="168" r="17" fill="#1B9E5A"/><text x="734" y="174" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="734" dy="0">4</tspan></text><text x="798" y="212" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="798" dy="0">Check the</tspan><tspan x="798" dy="21">green tick</tspan></text><text x="798" y="262" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="798" dy="0">Actions tab: tests</tspan><tspan x="798" dy="17">and gallery rebuild</tspan></text><path d="M894,211 L920,211" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="922" y="136" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="952" cy="168" r="17" fill="#1B9E5A"/><text x="952" y="174" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="952" dy="0">5</tspan></text><text x="1016" y="212" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="1016" dy="0">Announce it</tspan></text><text x="1016" y="241" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="1016" dy="0">tell the writers</tspan></text><text x="40" y="336" font-size="19" font-weight="700" fill="#1B9E5A" text-anchor="start"><tspan x="40" dy="0">Writers: getting the update</tspan></text><rect x="50" y="352" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="80" cy="384" r="17" fill="#1B9E5A"/><text x="80" y="390" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="80" dy="0">1</tspan></text><text x="144" y="428" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="144" dy="0">Customize &gt;</tspan><tspan x="144" dy="21">Plugins</tspan></text><text x="144" y="478" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="144" dy="0">in Claude</tspan></text><path d="M240,427 L266,427" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="268" y="352" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="298" cy="384" r="17" fill="#1B9E5A"/><text x="298" y="390" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="298" dy="0">2</tspan></text><text x="362" y="428" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="362" dy="0">Manage</tspan><tspan x="362" dy="21">marketplace</tspan></text><text x="362" y="478" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="362" dy="0">dropdown beside</tspan><tspan x="362" dy="17">Add</tspan></text><path d="M458,427 L484,427" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="486" y="352" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="516" cy="384" r="17" fill="#1B9E5A"/><text x="516" y="390" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="516" dy="0">3</tspan></text><text x="580" y="428" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="580" dy="0">Check for</tspan><tspan x="580" dy="21">updates</tspan></text><text x="580" y="478" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="580" dy="0">3-dot menu</tspan></text><path d="M676,427 L702,427" fill="none" stroke="#0C1A33" stroke-width="3" marker-end="url(#ar-c)"/><rect x="704" y="352" width="188" height="150" rx="14" fill="#EEF8F2" stroke="#1B9E5A" stroke-width="2"/><circle cx="734" cy="384" r="17" fill="#1B9E5A"/><text x="734" y="390" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="734" dy="0">4</tspan></text><text x="798" y="428" font-size="17" font-weight="700" fill="#0C1A33" text-anchor="middle"><tspan x="798" dy="0">Start a</tspan><tspan x="798" dy="21">new chat</tspan></text><text x="798" y="478" font-size="13" font-weight="400" fill="#5B6B86" text-anchor="middle"><tspan x="798" dy="0">open chats keep</tspan><tspan x="798" dy="17">the old version</tspan></text></svg></div></section>
 
+<a class="card" href="detailed-guide.html"><span class="ct">Detailed guide</span><span class="cd">The full step-by-step guide: creating a GitHub account, getting access, connecting the assistant to Claude, making and revising content, ready-to-copy prompts, updating and troubleshooting, with screenshots.</span><span class="cg">Open the detailed guide &#8594;</span></a>
 <p class="muted">Library page (gallery, palettes, layouts, tap cues): <a href="https://desaikaushik1997.github.io/medsyn-assets/">https://desaikaushik1997.github.io/medsyn-assets/</a></p>
-</div><div class="ver">V2.2.7_15102026</div>
+</div><div class="ver">V2.2.8_16102026</div>
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
@@ -93,10 +115,14 @@ function build(){
   var t='Use the medsyn-interactive skill to turn the attached article into interactive content.\n\n'+
   'Format: Interactive article\nAudience: '+$('aud').value+'\nPalette: '+look+'\nLayout: '+lay+'\nTap cue: '+cue+'\n'+
   'Introduction: '+$('intro').value+'\nReferences: '+$('refs').value+'\nAbbreviations: '+$('abbr').value+'\n'+
-  'Density: '+$('den').value+'\nImages: '+($('img').value||'none')+'\n\nYou have all my answers, so skip the questions and show me the plan.';
+  'Density: '+$('den').value+'\nImages: '+($('img').value||'none')+'\n';
+  var comp=$('comp').value.replace(/\s+$/,'');
+  if(comp){t+='\nComponents I want:\n'+comp+'\n'}
+  if($('plan').value==='skip'){t+='\nYou have all my answers. Skip the questions and skip the plan: build it straight away and put the plan table in your hand-off report.'}
+  else{t+='\nYou have all my answers, so skip the questions and show me the plan.'}
   $('msg').textContent=t;
 }
-document.querySelectorAll('select,input').forEach(function(e){e.addEventListener('input',build)});
+document.querySelectorAll('select,input,textarea').forEach(function(e){e.addEventListener('input',build)});
 $('copy').addEventListener('click',function(){
   var t=$('msg').textContent;
   function ok(){$('done').textContent='Copied. Paste it into a new Claude chat.'}
